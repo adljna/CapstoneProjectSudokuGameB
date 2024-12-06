@@ -26,9 +26,7 @@ import java.util.concurrent.Executors;
  * The main Sudoku program
  */
 public class Sudoku extends JFrame {
-    private static final long serialVersionUID = 1L;  // to prevent serial warning
-
-String mode;
+   String mode;
     private static final long serialVersionUID = 1L;  // to prevent serial warning
     // private variables
     private JLabel highScoreLabelE = new JLabel("Easy : None");
