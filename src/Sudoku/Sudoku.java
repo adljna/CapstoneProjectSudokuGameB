@@ -7,14 +7,13 @@
  * 2 - 5026231069 - Muhammad Zaky Al Khair
  * 3 - 5026231173 - Naura Salsabila
  */
-package Sudoku;
 
-import Sudoku.GameBoardPanel;
+package Sudoku;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import java.awt.*;
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedInputStream;
@@ -22,11 +21,14 @@ import java.io.File;
 import java.io.InputStream;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+
+
 /**
  * The main Sudoku program
  */
 public class Sudoku extends JFrame {
-   String mode;
+    String mode;
     private static final long serialVersionUID = 1L;  // to prevent serial warning
     // private variables
     private JLabel highScoreLabelE = new JLabel("Easy : None");
@@ -45,7 +47,7 @@ public class Sudoku extends JFrame {
     private JButton btnPause = new JButton("Pause");
     private JLabel timerLabel = new JLabel("05:00");
     private JLabel messageLabel = new JLabel("Welcome to Sudoku!");
-    private JButton musicButton = new JButton("Music Off");
+    private JButton musicToggleButton = new JButton("Music Off");
     private JButton resetGameButton = new JButton("Reset Game");
     private JLabel highscore = new JLabel("HighScore ");
 
@@ -67,8 +69,6 @@ public class Sudoku extends JFrame {
     private Theme currentTheme = Theme.DEFAULT; // Tema awal
     private JButton themeButton = new JButton("Change Theme"); // Button for theme selection
     private Font customFont;
-    private JButton musicToggleButton = new JButton("Music Off");
-
 
     // Constructor
     public Sudoku() {
@@ -209,7 +209,6 @@ public class Sudoku extends JFrame {
                 }
             }
         });
-
         addWindowListener(new java.awt.event.WindowAdapter() {
             @Override
             public void windowClosing(java.awt.event.WindowEvent windowEvent) {
@@ -224,7 +223,7 @@ public class Sudoku extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // to handle window-closing
         setTitle("Sudoku");
         setVisible(true);
-}
+    }
 
     // Memulai permainan baru
     private void startNewGame() {
@@ -291,7 +290,6 @@ public class Sudoku extends JFrame {
         startTimer(); // Otomatis mulai timer
         resetMessageLabel();
     }
-
     private void saveScore(int score, String name) {
         int time; // Menghitung waktu yang digunakan berdasarkan waktu tersisa
         if ("Easy".equals(mode)) {
@@ -324,6 +322,7 @@ public class Sudoku extends JFrame {
         return String.format("%02d:%02d", minutes, seconds);
     }
 
+    // Memulai timer
     private void startTimer() {
         if (!isTimerRunning) {
             timer.start();
@@ -331,19 +330,20 @@ public class Sudoku extends JFrame {
         }
     }
 
+    // Menjeda timer
     private void pauseTimer() {
         if (isTimerRunning) {
             timer.stop();
             isTimerRunning = false;
         }
     }
-    
+
+    // Memperbarui label timer
     private void updateTimerLabel() {
         int minutes = timeLeft / 60;
         int seconds = timeLeft % 60;
         timerLabel.setText(String.format("%02d:%02d", minutes, seconds));
     }
-    
     public void updateStatusBar() {
         int cellsRemaining = board.countCellsRemaining();
         messageLabel.setText(String.format("Player: %s | Cells remaining: %d | Wrong attempts: %d", playerName, cellsRemaining, wrongAttempts));
@@ -359,14 +359,13 @@ public class Sudoku extends JFrame {
         }
     }
 
+    // Reset game
     private void resetGame() {
         startNewGame();
     }
-
     public void resetMessageLabel() {
         messageLabel.setText("Welcome to Sudoku " + playerName + "!");
     }
-
     private JButton createStyledButton(JButton button) {
         button.setFont(customFont);
         button.setBackground(Color.DARK_GRAY);
@@ -374,7 +373,6 @@ public class Sudoku extends JFrame {
         button.setFocusPainted(false);
         return button;
     }
-
     private void playSound(String soundFileName) {
         try {
             File soundFile = new File(getClass().getResource("/" + soundFileName).toURI());
@@ -385,7 +383,7 @@ public class Sudoku extends JFrame {
             e.printStackTrace();
         }
     }
-
+    // Start background music
     private void startBackgroundMusic(String musicFileName) {
         try {
             InputStream audioSrc = getClass().getResourceAsStream(musicFileName);
@@ -403,6 +401,7 @@ public class Sudoku extends JFrame {
         }
     }
 
+    // Stop background music
     private void stopBackgroundMusic() {
         if (backgroundMusicClip != null && backgroundMusicClip.isRunning()) {
             backgroundMusicClip.stop();
@@ -421,8 +420,7 @@ public class Sudoku extends JFrame {
             musicToggleButton.setText("Music Off");
         }
     }
-
-     @Override
+    @Override
     public void dispose() {
         stopBackgroundMusic(); // Stop music on exit
         executorService.shutdownNow(); // Clean up the executor service
@@ -431,6 +429,7 @@ public class Sudoku extends JFrame {
     private void showThemeSelectionDialog() {
         String[] themes = {"Default", "White Mode", "Colorful UI", "Wood Chocolate"};
 
+// Default colors for a more standard UI theme
         UIManager.put("OptionPane.background", Color.WHITE);
         UIManager.put("Panel.background", Color.WHITE);
         UIManager.put("OptionPane.messageForeground", Color.BLACK);
@@ -513,7 +512,7 @@ public class Sudoku extends JFrame {
         // Repaint the frame to apply changes
         repaint();
     }
-    
+
     private void updateComponentColors(Container container, Color panelBackground, Color buttonBackground, Color buttonForeground) {
         for (Component component : container.getComponents()) {
             if (component instanceof JPanel) {
