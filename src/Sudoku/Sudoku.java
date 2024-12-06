@@ -217,7 +217,7 @@ public class Sudoku extends JFrame {
 
         // Mulai game baru saat aplikasi dijalankan
         startNewGame();
-        startBackgroundMusic("membasuh.wav");
+        startBackgroundMusic("lagu.wav");
         pack();     // Pack the UI components, instead of using setSize()
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // to handle window-closing
         setTitle("Sudoku");
