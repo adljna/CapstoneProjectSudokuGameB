@@ -15,7 +15,7 @@ public class Sudoku extends JFrame {
     JButton btnNewGame = new JButton("New Game");
 
     // Constructor
-    public SudokuMain() {
+    public Sudoku() {
         Container cp = getContentPane();
         cp.setLayout(new BorderLayout());
 
@@ -31,12 +31,5 @@ public class Sudoku extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);  // to handle window-closing
         setTitle("Sudoku");
         setVisible(true);
-    }
-
-    /** The entry main() entry method */
-    public static void main(String[] args) {
-        // [TODO 1] Check "Swing program template" on how to run
-        //  the constructor of "SudokuMain"
-        new SudokuMain();
     }
 }
