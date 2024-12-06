@@ -45,7 +45,7 @@ public class Sudoku extends JFrame {
     private JButton btnPause = new JButton("Pause");
     private JLabel timerLabel = new JLabel("05:00");
     private JLabel messageLabel = new JLabel("Welcome to Sudoku!");
-    private JButton musicToggleButton = new JButton("Music Off");
+    private JButton musicButton = new JButton("Music Off");
     private JButton resetGameButton = new JButton("Reset Game");
     private JLabel highscore = new JLabel("HighScore ");
 
