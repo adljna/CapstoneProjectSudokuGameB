@@ -92,7 +92,7 @@ public class Sudoku extends JFrame {
 // Configure message label
         messageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         messageLabel.setPreferredSize(new Dimension(250, 45));
-        messageLabel.setFont(customFont.deriveFont(25f)); // Ukuran lebih besar
+        messageLabel.setFont(customFont.deriveFont(22f)); // Ukuran lebih besar
         messageLabel.setForeground(new Color(176, 224, 230)); // Gaming theme color
         messageLabel.setBorder(BorderFactory.createEmptyBorder(10, 0, 0, 0)); // Padding untuk keseluruhan panel
         cp.add(messageLabel, BorderLayout.NORTH); // Tambahkan di atas papan
