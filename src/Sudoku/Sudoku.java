@@ -337,8 +337,14 @@ String mode;
             isTimerRunning = false;
         }
     }
+    
     private void updateTimerLabel() {
         int minutes = timeLeft / 60;
         int seconds = timeLeft % 60;
         timerLabel.setText(String.format("%02d:%02d", minutes, seconds));
+    }
+    
+    public void updateStatusBar() {
+        int cellsRemaining = board.countCellsRemaining();
+        messageLabel.setText(String.format("Player: %s | Cells remaining: %d | Wrong attempts: %d", playerName, cellsRemaining, wrongAttempts));
     }
