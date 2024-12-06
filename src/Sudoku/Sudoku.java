@@ -317,3 +317,9 @@ String mode;
             }
         }
     }
+    private String formatTime(int x) {
+        int minutes = x / 60;
+        int seconds = x % 60;
+        return String.format("%02d:%02d", minutes, seconds);
+    }
+    
