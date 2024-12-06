@@ -421,4 +421,48 @@ String mode;
             musicToggleButton.setText("Music Off");
         }
     }
+
+     @Override
+    public void dispose() {
+        stopBackgroundMusic(); // Stop music on exit
+        executorService.shutdownNow(); // Clean up the executor service
+        super.dispose();
+    }
+    private void showThemeSelectionDialog() {
+        String[] themes = {"Default", "White Mode", "Colorful UI", "Wood Chocolate"};
+
+        UIManager.put("OptionPane.background", Color.WHITE);
+        UIManager.put("Panel.background", Color.WHITE);
+        UIManager.put("OptionPane.messageForeground", Color.BLACK);
+        UIManager.put("ComboBox.selectionBackground", Color.LIGHT_GRAY);
+        UIManager.put("ComboBox.selectionForeground", Color.BLACK);
+
+
+        String selectedTheme = (String) JOptionPane.showInputDialog(
+                this,
+                "Select a theme:",
+                "Theme Selection",
+                JOptionPane.PLAIN_MESSAGE,
+                null,
+                themes,
+                themes[0]
+        );
+
+        if (selectedTheme != null) {
+            switch (selectedTheme) {
+                case "Default":
+                    applyTheme(Theme.DEFAULT);
+                    break;
+                case "White Mode":
+                    applyTheme(Theme.WHITE);
+                    break;
+                case "Colorful UI":
+                    applyTheme(Theme.COLORFUL);
+                    break;
+                case "Wood Chocolate":
+                    applyTheme(Theme.WOOD_CHOCOLATE);
+                    break;
+            }
+        }
+    }
     
