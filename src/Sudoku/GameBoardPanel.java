@@ -68,26 +68,16 @@ public class GameBoardPanel extends JPanel {
         }
     }
 
-    /**
-     * Generate a new puzzle; and reset the game board of cells based on the puzzle.
-     * You can call this method to start a new game.
-     */
-    public void newGame() {
-        // Generate a new puzzle
-        puzzle.newPuzzle(2);
-
-        // Initialize all the 9x9 cells, based on the puzzle.
+    public void newGame(int cellsToGuess) {
+        puzzle.newPuzzle(cellsToGuess);
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
                 cells[row][col].newGame(puzzle.numbers[row][col], puzzle.isGiven[row][col]);
             }
         }
+        resetHighlighting(); // Reset highlighting when starting a new game
     }
 
-    /**
-     * Return true if the puzzle is solved
-     * i.e., none of the cell have status of TO_GUESS or WRONG_GUESS
-     */
     public boolean isSolved() {
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
@@ -97,6 +87,25 @@ public class GameBoardPanel extends JPanel {
             }
         }
         return true;
+    }
+
+    private void highlightConflicts(Cell sourceCell, int value) {
+        resetHighlighting(); // Clear previous highlights
+
+        int row = sourceCell.row;
+        int col = sourceCell.col;
+
+        // Highlight cells in the same row and column
+        for (int i = 0; i < SudokuConstants.GRID_SIZE; i++) {
+            if (cells[row][i].number == value && cells[row][i] != sourceCell) {
+                cells[row][i].setBackground(conflictColor);
+                highlightedCells.add(cells[row][i]);
+            }
+            if (cells[i][col].number == value && cells[i][col] != sourceCell) {
+                cells[i][col].setBackground(conflictColor);
+                highlightedCells.add(cells[i][col]);
+            }
+        }
     }
 
     // [TODO 2] Define a Listener Inner Class for all the editable Cells
