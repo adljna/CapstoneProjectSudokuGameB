@@ -514,3 +514,20 @@ String mode;
         repaint();
     }
     
+    private void updateComponentColors(Container container, Color panelBackground, Color buttonBackground, Color buttonForeground) {
+        for (Component component : container.getComponents()) {
+            if (component instanceof JPanel) {
+                component.setBackground(panelBackground);
+                updateComponentColors((Container) component, panelBackground, buttonBackground, buttonForeground);
+            } else if (component instanceof JButton) {
+                JButton button = (JButton) component;
+                button.setBackground(buttonBackground);
+                button.setForeground(buttonForeground);
+                button.setFocusPainted(false);
+            } else if (component instanceof JLabel) {
+                JLabel label = (JLabel) component;
+                label.setForeground(buttonForeground);
+            }
+        }
+    }
+}
