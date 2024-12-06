@@ -337,4 +337,8 @@ String mode;
             isTimerRunning = false;
         }
     }
-    
+    private void updateTimerLabel() {
+        int minutes = timeLeft / 60;
+        int seconds = timeLeft % 60;
+        timerLabel.setText(String.format("%02d:%02d", minutes, seconds));
+    }
