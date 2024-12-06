@@ -322,4 +322,10 @@ String mode;
         int seconds = x % 60;
         return String.format("%02d:%02d", minutes, seconds);
     }
+    private void startTimer() {
+        if (!isTimerRunning) {
+            timer.start();
+            isTimerRunning = true;
+        }
+    }
     
