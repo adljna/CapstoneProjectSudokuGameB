@@ -402,3 +402,23 @@ String mode;
             e.printStackTrace();
         }
     }
+
+    private void stopBackgroundMusic() {
+        if (backgroundMusicClip != null && backgroundMusicClip.isRunning()) {
+            backgroundMusicClip.stop();
+            backgroundMusicClip.close();
+            isMusicPlaying = false;
+        }
+    }
+
+    // Toggle background music
+    private void toggleMusic() {
+        if (isMusicPlaying) {
+            stopBackgroundMusic();
+            musicToggleButton.setText("Music On");
+        } else {
+            startBackgroundMusic("/lagu.wav");
+            musicToggleButton.setText("Music Off");
+        }
+    }
+    
