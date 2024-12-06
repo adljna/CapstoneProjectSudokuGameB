@@ -363,6 +363,24 @@ String mode;
         startNewGame();
     }
 
-public void resetMessageLabel() {
+    public void resetMessageLabel() {
         messageLabel.setText("Welcome to Sudoku " + playerName + "!");
+    }
+
+    private JButton createStyledButton(JButton button) {
+        button.setFont(customFont);
+        button.setBackground(Color.DARK_GRAY);
+        button.setForeground(Color.WHITE);
+        button.setFocusPainted(false);
+        return button;
+    }
+    private void playSound(String soundFileName) {
+        try {
+            File soundFile = new File(getClass().getResource("/" + soundFileName).toURI());
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(soundFile));
+            clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
