@@ -358,3 +358,11 @@ String mode;
             startNewGame();
         }
     }
+
+    private void resetGame() {
+        startNewGame();
+    }
+
+public void resetMessageLabel() {
+        messageLabel.setText("Welcome to Sudoku " + playerName + "!");
+    }
