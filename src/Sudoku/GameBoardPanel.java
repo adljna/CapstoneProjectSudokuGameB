@@ -1,24 +1,21 @@
 package Sudoku;
-
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.border.Border;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashSet;
+import java.util.Set;
 
 public class GameBoardPanel extends JPanel {
-    private static final long serialVersionUID = 1L;  // to prevent serial warning
-
-    // Define named constants for UI sizes
-    public static final int CELL_SIZE = 60;   // Cell width/height in pixels
-    public static final int BOARD_WIDTH  = CELL_SIZE * SudokuConstants.GRID_SIZE;
+    private static final long serialVersionUID = 1L;
+    public static final int CELL_SIZE = 60;
+    public static final int BOARD_WIDTH = CELL_SIZE * SudokuConstants.GRID_SIZE;
     public static final int BOARD_HEIGHT = CELL_SIZE * SudokuConstants.GRID_SIZE;
-    // Board width/height in pixels
-
-    // Define properties
-    /** The game board composes of 9x9 Cells (customized JTextFields) */
     private Cell[][] cells = new Cell[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
-    /** It also contains a Puzzle with array numbers and isGiven */
     private Puzzle puzzle = new Puzzle();
-
+    private Color conflictColor = new Color(255, 182, 193); // Light pink for conflicts
+    private Set<Cell> highlightedCells = new HashSet<>(); // To track highlighted cells
     /** Constructor */
     public GameBoardPanel() {
         super.setLayout(new GridLayout(SudokuConstants.GRID_SIZE, SudokuConstants.GRID_SIZE));  // JPanel
