@@ -40,8 +40,32 @@ public class GameBoardPanel extends JPanel {
                 }
             }
         }
-
         super.setPreferredSize(new Dimension(BOARD_WIDTH, BOARD_HEIGHT));
+        for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
+            for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
+                int top = (row % SudokuConstants.SUBGRID_SIZE == 0) ? 3 : 1;
+                int left = (col % SudokuConstants.SUBGRID_SIZE == 0) ? 3 : 1; 
+                int bottom = (row == SudokuConstants.GRID_SIZE - 1) ? 3 : 1;
+                int right = (col == SudokuConstants.GRID_SIZE - 1) ? 3 : 1;  
+
+                if (row % SudokuConstants.SUBGRID_SIZE == 0) {
+                    top = 5; 
+                }
+                if (col % SudokuConstants.SUBGRID_SIZE == 0) {
+                    left = 5; 
+                }
+
+                Border border = BorderFactory.createMatteBorder(top, left, bottom, right, Color.BLACK);
+
+                Border thinGrayBorder = BorderFactory.createMatteBorder(
+                        (top == 1) ? 1 : 0, (left == 1) ? 1 : 0, (bottom == 1) ? 1 : 0, (right == 1) ? 1 : 0,
+                        Color.WHITE);
+
+                cells[row][col].setBorder(BorderFactory.createCompoundBorder(border, thinGrayBorder));
+
+                super.add(cells[row][col]);
+            }
+        }
     }
 
     /**
