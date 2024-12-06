@@ -67,6 +67,8 @@ public class Sudoku extends JFrame {
     private Theme currentTheme = Theme.DEFAULT; // Tema awal
     private JButton themeButton = new JButton("Change Theme"); // Button for theme selection
     private Font customFont;
+    private JButton musicToggleButton = new JButton("Music Off");
+
 
     // Constructor
     public Sudoku() {
