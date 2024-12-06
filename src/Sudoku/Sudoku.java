@@ -225,3 +225,69 @@ String mode;
         setTitle("Sudoku");
         setVisible(true);
 }
+
+    // Memulai permainan baru
+    private void startNewGame() {
+        if (playerName.equals("Player")) { // Hanya minta nama pertama kali
+            boolean validName = false;
+            while (!validName) {
+                playerName = JOptionPane.showInputDialog(
+                        this,
+                        "Enter your name:",
+                        "Player Name",
+                        JOptionPane.QUESTION_MESSAGE
+                );
+                if (playerName == null ){
+                    System.exit(0);
+                }
+                else if (playerName.trim().isEmpty()) {
+                    JOptionPane.showMessageDialog(
+                            this,
+                            "Name cannot be empty. Please enter your name.",
+                            "Invalid Input",
+                            JOptionPane.WARNING_MESSAGE
+                    );
+                } else {
+                    validName = true;
+                }
+            }
+        }
+        String[] options = {"Easy", "Medium", "Hard"};
+        int choice = JOptionPane.showOptionDialog(
+                null,
+                "Pilih level yang diinginkan:",
+                "Input Level",
+                JOptionPane.DEFAULT_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        );
+        if (choice == JOptionPane.CLOSED_OPTION) {
+            System.exit(0); // Keluar dari aplikasi
+        }
+        int cellsToGuess;
+        if (choice == 0) { // Easy
+            timeLeft = timeLeftEasy;
+            cellsToGuess = 4;
+            mode = "Easy";
+        } else if (choice == 1) { // Medium
+            timeLeft = timeLeftMedium;
+            cellsToGuess = 7;
+            mode = "Medium";
+        } else if (choice == 2) { // Hard
+            timeLeft = timeLeftHard;
+            cellsToGuess = 10;
+            mode = "Hard";
+        } else { // Default jika tidak ada pilihan
+            JOptionPane.showMessageDialog(null, "Tidak ada level yang dipilih. Menggunakan default Easy.", "Info", JOptionPane.INFORMATION_MESSAGE);
+            timeLeft = timeLeftEasy;
+            cellsToGuess = 4;
+        }
+        wrongAttempts = 0; // Reset wrong attempts
+        updateStatusBar(); // Update the status bar
+        updateTimerLabel();
+        board.newGame(cellsToGuess); // Berikan parameter cellsToGuess
+        startTimer(); // Otomatis mulai timer
+        resetMessageLabel();
+    }
