@@ -291,3 +291,29 @@ String mode;
         startTimer(); // Otomatis mulai timer
         resetMessageLabel();
     }
+
+    private void saveScore(int score, String name) {
+        int time; // Menghitung waktu yang digunakan berdasarkan waktu tersisa
+        if ("Easy".equals(mode)) {
+            time = timeLeftEasy - score;
+            if (fastestTimerEasy == 0 || time < fastestTimerEasy) {
+                fastestTimerEasy = time;
+                highestName = name;
+                highScoreLabelE.setText(String.format("Easy: %s", formatTime(time)));
+            }
+        } else if ("Medium".equals(mode)) {
+            time = timeLeftMedium - score;
+            if (fastestTimerMedium == 0 || time < fastestTimerMedium) {
+                fastestTimerMedium = time;
+                highestName = name;
+                highScoreLabelM.setText(String.format("Medium: %s", formatTime(time)));
+            }
+        } else if ("Hard".equals(mode)) {
+            time = timeLeftHard - score;
+            if (fastestTimerHard == 0 || time < fastestTimerHard) {
+                fastestTimerHard = time;
+                highestName = name;
+                highScoreLabelH.setText(String.format("Hard: %s", formatTime(time)));
+            }
+        }
+    }
