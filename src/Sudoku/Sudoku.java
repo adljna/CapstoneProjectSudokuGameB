@@ -465,4 +465,52 @@ String mode;
             }
         }
     }
+
+    private void applyTheme(Theme theme) {
+        currentTheme = theme;
+
+        // Update UI colors based on theme
+        Color backgroundColor = Color.BLACK;
+        Color foregroundColor = new Color(176, 224, 230);
+        Color buttonBackgroundColor = new Color(70, 70, 70);
+        Color buttonForegroundColor = Color.WHITE;
+
+        switch (theme) {
+            case DEFAULT:
+                backgroundColor = Color.BLACK;
+                foregroundColor = new Color(176, 224, 230);
+                buttonBackgroundColor = new Color(70, 70, 70);
+                buttonForegroundColor = Color.WHITE;
+                break;
+            case WHITE:
+                backgroundColor = Color.WHITE;
+                foregroundColor = new Color(50, 50, 50);
+                buttonBackgroundColor = new Color(240, 240, 240);
+                buttonForegroundColor = new Color(50, 50, 50);
+                break;
+            case COLORFUL:
+                backgroundColor = new Color(255, 105, 180); // Pink background
+                foregroundColor = new Color(255, 255, 0);   // Yellow text
+                buttonBackgroundColor = new Color(0, 255, 255); // Cyan buttons
+                buttonForegroundColor = new Color(128, 0, 128); // Purple text
+                break;
+            case WOOD_CHOCOLATE:
+                backgroundColor = new Color(139, 69, 19); // Wood brown background
+                foregroundColor = new Color(255, 228, 181); // Light brown text
+                buttonBackgroundColor = new Color(205, 133, 63); // Chocolate buttons
+                buttonForegroundColor = new Color(255, 228, 181); // Light text
+                break;
+        }
+
+        // Update main frame background and labels
+        getContentPane().setBackground(backgroundColor);
+        messageLabel.setForeground(foregroundColor);
+        timerLabel.setForeground(foregroundColor);
+
+        // Update buttons and panels
+        updateComponentColors(getContentPane(), backgroundColor, buttonBackgroundColor, buttonForegroundColor);
+
+        // Repaint the frame to apply changes
+        repaint();
+    }
     
