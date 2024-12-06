@@ -9,16 +9,12 @@
  */
 package Sudoku;
 
-import Sudoku.SudokuConstants;
-
 public class Puzzle {
     // All variables have package access
     // The numbers on the puzzle
     int[][] numbers = new int[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
     // The clues - isGiven (no need to guess) or need to guess
-    boolean[][] isGiven = new boolean[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];
-
-    // Constructor
+    boolean[][] isGiven = new boolean[SudokuConstants.GRID_SIZE][SudokuConstants.GRID_SIZE];    // Constructor
     public Puzzle() {
         super();
     }
@@ -48,24 +44,21 @@ public class Puzzle {
 
         // Need to use input parameter cellsToGuess!
         // Hardcoded for testing, only 2 cells of "8" is NOT GIVEN
-        boolean[][] hardcodedIsGiven =
-                {{true, true, true, true, true, false, true, true, true},
-                        {true, true, true, true, true, true, true, true, false},
-                        {true, true, true, true, true, true, true, true, true},
-                        {true, true, true, true, true, true, true, true, true},
-                        {true, true, true, true, true, true, true, true, true},
-                        {true, true, true, true, true, true, true, true, true},
-                        {true, true, true, true, true, true, true, true, true},
-                        {true, true, true, true, true, true, true, true, true},
-                        {true, true, true, true, true, true, true, true, true}};
 
         // Copy from hardcodedIsGiven into array "isGiven"
         for (int row = 0; row < SudokuConstants.GRID_SIZE; ++row) {
             for (int col = 0; col < SudokuConstants.GRID_SIZE; ++col) {
-                isGiven[row][col] = hardcodedIsGiven[row][col];
+                isGiven[row][col] = true;
+                }
             }
+        for (int i = 0; i < cellsToGuess; i++) {
+            isGiven[(int) (Math.random() * SudokuConstants.GRID_SIZE)][(int) (Math.random() * SudokuConstants.GRID_SIZE)] = false;
         }
-    }
 
+        //(For advanced students) use singleton design pattern for this clas
+
+
+    }
+}
     //(For advanced students) use singleton design pattern for this class
 }
