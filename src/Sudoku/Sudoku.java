@@ -374,12 +374,30 @@ String mode;
         button.setFocusPainted(false);
         return button;
     }
+
     private void playSound(String soundFileName) {
         try {
             File soundFile = new File(getClass().getResource("/" + soundFileName).toURI());
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(soundFile));
             clip.start();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void startBackgroundMusic(String musicFileName) {
+        try {
+            InputStream audioSrc = getClass().getResourceAsStream(musicFileName);
+            if (audioSrc == null) {
+                throw new IllegalArgumentException("Music file not found: " + musicFileName);
+            }
+            InputStream bufferedIn = new BufferedInputStream(audioSrc);
+            backgroundMusicClip = AudioSystem.getClip();
+            backgroundMusicClip.open(AudioSystem.getAudioInputStream(bufferedIn));
+            backgroundMusicClip.loop(Clip.LOOP_CONTINUOUSLY); // Loop the music
+            backgroundMusicClip.start();
+            isMusicPlaying = true;
         } catch (Exception e) {
             e.printStackTrace();
         }
