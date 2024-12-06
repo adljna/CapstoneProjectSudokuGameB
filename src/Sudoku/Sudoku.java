@@ -348,3 +348,13 @@ String mode;
         int cellsRemaining = board.countCellsRemaining();
         messageLabel.setText(String.format("Player: %s | Cells remaining: %d | Wrong attempts: %d", playerName, cellsRemaining, wrongAttempts));
     }
+
+    public void incrementWrongAttempts() {
+        wrongAttempts++;
+        updateStatusBar();
+        if (wrongAttempts >= 3) {
+            playSound("naura.wav"); // Play losing sound
+            JOptionPane.showMessageDialog(this, "Three wrong attempts! Restarting the game.", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+            startNewGame();
+        }
+    }
